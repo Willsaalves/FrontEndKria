@@ -9,7 +9,7 @@ interface Repository {
     id: number;
     name: string;
     description: string;
-    language: string;
+    language?: string;
     updated_at: string;
     owner: {
         login: string;
@@ -69,7 +69,7 @@ const RepositoryDetails: React.FC = () => {
             axios.delete(`http://localhost:5093/api/Favorite/DeleteByRepoName?RepoName=${repo}`)
                 .then(response => {
                     console.log('Repository unfavorited successfully');
-                    setFavorited(false); 
+                    setFavorited(false);
                 })
                 .catch(error => {
                     console.error('Error unfavoriting repository:', error);
@@ -80,16 +80,16 @@ const RepositoryDetails: React.FC = () => {
                     Owner: owner,
                     RepoName: repo,
                     LastUpdate: repository.updated_at,
-                    Language: repository.language, // Enviar a linguagem
+                    Language: repository.language ?? 'Not specified', // Definindo um valor padrão
                     Status: true
                 })
-                .then(response => {
-                    console.log('Repository favorited successfully');
-                    setFavorited(true); 
-                })
-                .catch(error => {
-                    console.error('Error favoriting repository:', error);
-                });
+                    .then(response => {
+                        console.log('Repository favorited successfully');
+                        setFavorited(true);
+                    })
+                    .catch(error => {
+                        console.error('Error favoriting repository:', error);
+                    });
             }
         }
     };
@@ -109,7 +109,7 @@ const RepositoryDetails: React.FC = () => {
                     />
                 </RepositoryName>
                 <p>Description: {repository.description}</p>
-                <p>Language: {repository.language}</p>
+                <p>Language: {repository.language ?? 'Not specified'}</p>
                 <p>Last Updated: {new Date(repository.updated_at).toLocaleDateString()}</p>
                 <p>Owner: {repository.owner.login}</p>
             </RepositoryHeader>
@@ -122,9 +122,10 @@ const RepositoryDetails: React.FC = () => {
                     ))}
                 </ul>
             </ContributorsSection>
-            
-            <BackLink to="/myRepositories">Back to Repositories</BackLink>
+
+            <BackLink to="/myRepositories">Repositories</BackLink>
             <BackLink2 to="/favoriteRepositories">Favoritos</BackLink2>
+            <BackLink2 to="/search">Search</BackLink2>
         </Container>
     );
 };
@@ -153,10 +154,10 @@ const BackLink = styled(Link)`
     margin-top: 20px;
     margin-right: 10px;
     padding: 10px 20px;
-
-    border: none;
-    background-color: #333;
-    color: #fff;
+    border: 2px solid #007bff;
+    border-radius: 5px;
+    text-decoration: none;
+    color: #333;
     border-radius: 5px;
     cursor: pointer;
 
@@ -170,8 +171,10 @@ const BackLink2 = styled(Link)`
     margin-left: 10px;
     padding: 10px 20px;
     border: none;
-    background-color: #333;
-    color: #fff;
+    border: 2px solid #007bff;
+    border-radius: 5px;
+    text-decoration: none;
+    color: #333;
     border-radius: 5px;
     cursor: pointer;
 
@@ -180,7 +183,7 @@ const BackLink2 = styled(Link)`
     }
 `;
 
-const StarIcon = styled(FaStar)<{ favorited: boolean }>`
+const StarIcon = styled(FaStar) <{ favorited: boolean }>`
     margin-left: 5px;
     color: ${props => props.favorited ? 'yellow' : 'gray'};
     cursor: pointer;

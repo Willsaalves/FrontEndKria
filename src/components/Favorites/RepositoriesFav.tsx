@@ -52,6 +52,8 @@ const FavoriteRepositories: React.FC = () => {
         ))}
       </GridContainer>
       <BackLink to="/">Back to Menu</BackLink>
+      <BackLink2 to="/myRepositories">Back to Repositories</BackLink2>
+      <BackLink2 to="/search">Search</BackLink2>
     </Container>
   );
 };
@@ -92,6 +94,30 @@ const BackLink = styled(Link)`
     color: #4ef6f8;
     border-color: #4ef6f8;
   }
+`;
+
+
+const BackLink2 = styled(Link)`
+    margin-top: 20px;
+    margin-left: 10px;
+    padding: 10px 20px;
+    border: none;
+
+    display: inline-block;
+
+  
+    color: #333;
+    text-decoration: none;
+    font-weight: bold;
+    border: 2px solid #007bff;
+    border-radius: 5px;
+    transition: color 0.3s ease, border-color 0.3s ease;
+  
+
+    &:hover {
+      color: #4ef6f8;
+      border-color: #4ef6f8;
+    }
 `;
 
 export default FavoriteRepositories;
