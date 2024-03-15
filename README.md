@@ -16,10 +16,11 @@ Este é o repositório contendo o código-fonte do frontend da aplicação, dese
     npm install
     ```
 3. **Executar o Projeto:**
+    Precisa colocar o seu token no .env antes de iniciar o projeto
     npm run dev
 
 
-4. **Acessar a Aplicação:**
+5. **Acessar a Aplicação:**
 A aplicação estará disponível em [`http://localhost:3000/`](http://localhost:3000/).
 
 ## Funcionalidades
