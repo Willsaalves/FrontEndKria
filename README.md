@@ -16,7 +16,8 @@ Este é o repositório contendo o código-fonte do frontend da aplicação, dese
     npm install
     ```
 3. **Executar o Projeto:**
-    Precisa colocar o seu token no .env antes de iniciar o projeto
+    Precisa colocar o seu token no .env antes de iniciar o projeto.
+   
     npm run dev
 
 
